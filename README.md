@@ -1,2 +1,2 @@
-# DjangoStudy
-Django学习
+# Blog
+React/JS/Python/Django学习记录
