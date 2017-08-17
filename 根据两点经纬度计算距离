@@ -1,0 +1,26 @@
+# 根据两点经纬度计算两点之间的距离
+
+```
+EARTH_RADIUS = 6378.137
+
+
+def rad(d):
+    return d * math.pi / 180.0
+
+
+def get_distance(job_lat, job_lon, user_lat, user_lon):
+    rad_job_lat = rad(job_lat)
+    rad_user_lat = rad(user_lat)
+
+    rad_job_lon = rad(job_lon)
+    rad_user_lon = rad(user_lon)
+
+    a = rad_job_lat - rad_user_lat
+    b = rad_job_lon - rad_user_lon
+
+    s = 2 * math.asin(math.sqrt(math.pow(math.sin(a / 2), 2) + math.cos(rad_job_lat)
+                                * math.cos(rad_user_lat) * math.pow(math.sin(b / 2), 2)))
+    s = s * EARTH_RADIUS
+    s = round(s * 10000) / 10000  # 单位：Km
+
+    return s
