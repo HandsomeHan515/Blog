@@ -1,3 +1,4 @@
+```
 function Dog(name) {
   this.name = name;
   this.species = '犬科';
@@ -80,3 +81,4 @@ function deepCopy(p, c) {
   }
   return c;
 }
+```
