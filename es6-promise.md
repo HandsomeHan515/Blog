@@ -1,7 +1,7 @@
 ```
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-  const create = url => {
+  const get = url => {
     return new Promise((resolve, reject) => {
       $.ajax({
         url,
@@ -16,8 +16,8 @@
     });
   }
 
-  let p1 = create('data/1.txt');
-  let p2 = create('data/2.txt');
+  let p1 = get('data/1.txt');
+  let p2 = get('data/2.txt');
 
   Promise.all([p1, p2])
     .then(res => {
@@ -27,5 +27,10 @@
     .catch(err => {
       console.log(err);
     })
+
+  Promise.race([p2, p1])
+    .then(res => {
+      console.log('d', res);
+    });
 </script>
 ```
