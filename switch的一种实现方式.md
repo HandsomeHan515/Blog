@@ -1,39 +1,36 @@
 ```
-function Target(type) {
+function Switch(type) {
   this.type = type;
   this.arr = [];
 }
 
-Target.prototype = {
-  match: function(type, callback) {
-    this.arr.push(type);
-
-    this.target = type;
-    if (this.type === this.target) {
-        callback(this.target);
+Switch.prototype.match = function (key, callback) {
+  if (key == this.type) {
+    this.arr.push(key);
+    if (callback) {
+      callback(key);
     }
-    return this;
-},
-
-others: function(target) {
- // console.log('arr: %o', this.arr, this.type, this.arr.indexOf(this.type));
-  if (this.arr.indexOf(this.type) == -1) {
-      target();
   }
-  return null;
-}
-}
-
-function target(type) {
-  return new Target(type);
+  return this;
 }
 
+Switch.prototype.others = function (callback) {
+  if (this.arr.indexOf(this.type) < 0) {
+    if (callback) {
+      callback(this.type);
+    }
+  }
+  return this;
+}
 
-target(1)
-.match(1, console.log)
-.match(2, console.log)
-.match(4, console.log)
-.others(() => { 
-  console.log(11);
-});
+new Switch(1)
+  .match(1, function (res) {
+    console.log(res);
+  })
+  .match(2, function (res) {
+    console.log(res);
+  })
+  .others(function (res) {
+    console.log('default', res);
+  })
 ```
