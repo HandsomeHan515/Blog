@@ -1,14 +1,14 @@
 ```
-let timer = (callback) => {
+let setInterval = (callback, time) => {
   setTimeout(() => {
     if (callback) {
       callback();
     }
-    return timer(callback);
-  }, 1000);
+    return setInterval(callback, time);
+  }, time);
 }
 
-timer(function () {
+setInterval(function () {
   console.log(123);
-})
+}, 2000)
 ```
